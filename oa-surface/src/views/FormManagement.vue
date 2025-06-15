@@ -32,12 +32,17 @@
     <!-- 表格展示 -->
     <el-table :data="forms" border style="width: 100%">
       <el-table-column prop="id" label="ID" width="80" align="center" />
-      <el-table-column prop="key" label="表单标识 (Key)" align="center" />
+      <el-table-column prop="key" label="key" align="center" />
       <el-table-column prop="name" label="名称 (Name)" align="center" />
       <el-table-column prop="version" label="版本" width="100" align="center" />
-      <el-table-column prop="path" label="路径 (Path)" align="center">
+      <el-table-column prop="path" label="提交表单路径" align="center">
         <template #default="{ row }">
           {{ row.path || '无' }}
+        </template>
+      </el-table-column>
+      <el-table-column prop="viewPath" label="查看表单路径" align="center">
+        <template #default="{ row }">
+          {{ row.viewPath || '无' }}
         </template>
       </el-table-column>
       <el-table-column prop="createTime" label="创建时间" align="center">
@@ -74,8 +79,11 @@
         <el-form-item label="名称" prop="name">
           <el-input v-model="addForm.name" placeholder="请输入表单名称" />
         </el-form-item>
-        <el-form-item label="路径" prop="path">
-          <el-input v-model="addForm.path" placeholder="请输入表单路径" />
+        <el-form-item label="提交路径" prop="path">
+          <el-input v-model="addForm.path" placeholder="请输入提交表单路径" />
+        </el-form-item>
+        <el-form-item label="查看路径" prop="path">
+          <el-input v-model="addForm.viewPath" placeholder="请输入查看表单路径" />
         </el-form-item>
       </el-form>
       <template #footer>
@@ -110,12 +118,14 @@ export default {
     const addForm = ref({
       key: '',
       name: '',
-      path: ''
+      path: '',
+      viewPath: ''
     });
     const rules = {
       key: [{ required: true, message: '请输入表单标识', trigger: 'blur' }],
       name: [{ required: true, message: '请输入表单名称', trigger: 'blur' }],
-      path: [{ required: true, message: '请输入表单路径', trigger: 'blur' }]
+      path: [{ required: true, message: '请输入提交时表单路径', trigger: 'blur' }],
+      viewPath: [{ required: true, message: '请输入查看时表单路径', trigger: 'blur' }]
     };
     const addFormRef = ref(null);
 
